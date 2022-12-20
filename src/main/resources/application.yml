@@ -5,18 +5,18 @@ server:
       port: 8080
 
 spring:
-#  datasource:
-#    url: SPRING_DATASOURCE_URL
-#    username: root
-#    password: SPRING_DATASOURCE_PASSWORD
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: SPRING_DATASOURCE_URL
+    username: root
+    password: SPRING_DATASOURCE_PASSWORD
+    driver-class-name: com.mysql.cj.jdbc.Driver
     mvc:
       pathmatch:
         matching-strategy: ant_path_matcher
 
-#  jpa:
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: update
-#    database-platform: org.hibernate.dialect.MySQL8Dialect
-#    database: mysql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
