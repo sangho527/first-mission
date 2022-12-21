@@ -13,7 +13,7 @@ public class HelloController {
     @Bean
     @GetMapping("/hello")
     public String hello(){
-        return "hello";
+        return "bye";
     }
 
 }
