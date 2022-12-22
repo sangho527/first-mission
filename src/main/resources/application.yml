@@ -2,11 +2,11 @@ server:
   servlet:
     encoding:
       force-response: true
-      port: 8080
+
 
 spring:
   datasource:
-    url: SPRING_DATASOURCE_URL
+    url: localhost
     username: root
     password: SPRING_DATASOURCE_PASSWORD
     driver-class-name: com.mysql.cj.jdbc.Driver
