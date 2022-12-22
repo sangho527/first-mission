@@ -28,6 +28,6 @@ public class UserController {
 
     @PostMapping("login") // 로그인
     public ResponseEntity<String> login(@RequestBody UserloginRequest dto) {
-        return ResponseEntity.ok().body("로그인에 성공 했습니다.");
+        return ResponseEntity.ok().body("로그인에 성공 했습니다..");
     }
 }
