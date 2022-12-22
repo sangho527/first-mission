@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,6 +50,9 @@ class UserControllerTest {
     @Test
     @DisplayName("회원가입 실패 - userName 중복")
     void join_fail() throws Exception {
+
+        when(userService.join(any(), any()))
+                .thenThrow(new RuntimeException("해당 userId가 중복됩니다."));
 
         String userName = "Sangho";
         String password = "password";
