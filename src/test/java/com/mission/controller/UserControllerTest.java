@@ -46,9 +46,9 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("회원가입 실패")
+    @DisplayName("회원가입 실패 - userName이 중복입니다.")
     void join_fail() throws Exception {
-
+        
         String userName = "Sangho";
         String password = "password";
         mockMvc.perform(post("/api/v1/users/join")
