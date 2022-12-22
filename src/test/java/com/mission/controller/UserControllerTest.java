@@ -46,7 +46,7 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("회원가입 실패")
+    @DisplayName("회원가입 실패 - userName 중복")
     void join_fail() throws Exception {
 
         String userName = "Sangho";
