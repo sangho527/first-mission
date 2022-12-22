@@ -10,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
 @Builder
-@AllArgsConstructor
+@Entity
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
@@ -21,5 +21,14 @@ public class User {
     private Long id;
     private String userName;
     private String password;
+
+//    public User() {
+//    }
+//
+//    public User(Long id, String userName, String password) {
+//        this.id = id;
+//        this.userName = userName;
+//        this.password = password;
+//    }
 
 }

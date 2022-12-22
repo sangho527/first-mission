@@ -2,6 +2,8 @@ package com.mission.service;
 
 
 import com.mission.domain.User;
+import com.mission.exception.AppException;
+import com.mission.exception.ErrorCode;
 import com.mission.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class UserService {
         // userName 중복 체크하기
         userRepository.findByUserName(userName)
                 .ifPresent(user -> {
-                    throw new RuntimeException(userName + "는 이미 존재합니다.");
+                    throw new AppException(ErrorCode.USERNAME_DUPLICATED, userName + "는 이미 존재합니다.");
                 });
         // 저장 하기
         User user = User.builder()
