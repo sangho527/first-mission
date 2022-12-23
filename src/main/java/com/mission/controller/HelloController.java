@@ -14,7 +14,7 @@ HelloController {
     @Bean
     @GetMapping("/hello")
     public String hello(){
-        return "popin";
+        return "popin2";
     }
 
 }
