@@ -5,10 +5,9 @@ import com.mission.domain.User;
 import com.mission.exception.AppException;
 import com.mission.exception.ErrorCode;
 import com.mission.repository.UserRepository;
-import com.mission.utils.JwtTokenUtil;
+import com.mission.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +18,8 @@ public class UserService {
     private final UserRepository userRepository; // 중복 체크를 하기 위해선 db를 확인해야함
     private final BCryptPasswordEncoder encoder;
 
-    @Value(("${jwt.token.secret}")) // lombok이 아니라 springframework로 가져오기
-    private String key;
+    @Value(("${jwt.secret}")) // lombok이 아니라 springframework로 가져오기
+    private String secretKey;
 
     private Long expireTimeMs = 1000 * 60 * 60l; // 1시간 , long이라 l 붙여줌
 
@@ -54,8 +53,9 @@ public class UserService {
             throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드가 틀렸습니다.");
         }
 
-        String token = JwtTokenUtil.createToken(selectedUser.getUserName(), key, expireTimeMs);
+        String token = JwtUtil.createToken(selectedUser.getUserName(), secretKey, expireTimeMs);
 
-        return token;
+        return JwtUtil.createToken(userName, secretKey, expireTimeMs);
+//        return token;
     }
 }

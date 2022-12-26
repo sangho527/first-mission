@@ -8,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class JwtTokenFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
     private final UserService userService; // 이 둘을 AuthenticationConfig로 넘겨준다.
     private final String secretKey;

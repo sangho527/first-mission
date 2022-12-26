@@ -23,5 +23,4 @@ spring:
 
 
 jwt:
-  token:
-    secret: "secretKey"
+  secret: hello-world-ee.ff
