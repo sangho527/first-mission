@@ -5,7 +5,10 @@ import com.mission.domain.User;
 import com.mission.exception.AppException;
 import com.mission.exception.ErrorCode;
 import com.mission.repository.UserRepository;
+import com.mission.utils.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,11 @@ public class UserService {
 
     private final UserRepository userRepository; // 중복 체크를 하기 위해선 db를 확인해야함
     private final BCryptPasswordEncoder encoder;
+
+    @Value(("${jwt.token.secret}")) // lombok이 아니라 springframework로 가져오기
+    private String key;
+
+    private Long expireTimeMs = 1000 * 60 * 60l; // 1시간 , long이라 l 붙여줌
 
     public String join(String userName, String password) {
 
@@ -42,16 +50,12 @@ public class UserService {
 
         // password 틀림
 
-        if (!encoder.matches(selectedUser.getPassword(), password))
-                throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드가 틀렸습니다.");
+        if (!encoder.matches(password, selectedUser.getPassword())) {
+            throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드가 틀렸습니다.");
+        }
 
-        // 이곳에 exception 던지는 기능
+        String token = JwtTokenUtil.createToken(selectedUser.getUserName(), key, expireTimeMs);
 
-        // exception 끝났으면 token을 만들어 주는 기능
-
-        // 만든 토큰 리턴 기능
-
-
-        return "token return";
+        return token;
     }
 }

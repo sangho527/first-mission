@@ -20,3 +20,8 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL8Dialect
     database: mysql
+
+
+jwt:
+  token:
+    secret: "secretKey"
