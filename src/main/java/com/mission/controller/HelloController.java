@@ -14,7 +14,7 @@ HelloController {
     @Bean
     @GetMapping("/hello")
     public String hello(){
-        return "happy_new_year1";
+        return "happy_new_year";
     }
 
 }
