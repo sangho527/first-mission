@@ -2,7 +2,7 @@ package com.mission.controller;
 
 
 import com.mission.domain.dto.UserJoinRequest;
-import com.mission.domain.dto.UserloginRequest;
+import com.mission.domain.dto.UserLoginRequest;
 import com.mission.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +27,8 @@ public class UserController {
     }
 
     @PostMapping("login") // 로그인
-    public ResponseEntity<String> login(@RequestBody UserloginRequest dto) {
-        return ResponseEntity.ok().body("로그인에 성공 했습니다..");
+    public ResponseEntity<String> login(@RequestBody UserLoginRequest dto) {
+        String token = userService.login(dto.getUserName(), dto.getPassword());
+        return ResponseEntity.ok().body(token);
     }
 }
