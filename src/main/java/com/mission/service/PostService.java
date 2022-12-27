@@ -1,12 +1,15 @@
 package com.mission.service;
 
+import com.mission.domain.dto.PostResponse;
 import com.mission.domain.entity.Post;
-import com.mission.domain.entity.User;
-import com.mission.exception.AppException;
-import com.mission.exception.ErrorCode;
 import com.mission.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.awt.print.Pageable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +30,12 @@ public class PostService {
         postRepository.save(post);
 
         return "SUCCESS";
+    }
+
+    public List<PostResponse> getPost(Pageable pageable){
+        Page<Post> post = postRepository.findAll((org.springframework.data.domain.Pageable) pageable);
+        List<PostResponse> postResponses = post.stream()
+                .map(p -> PostResponse.of(p)).collect(Collectors.toList());
+        return postResponses;
     }
 }
