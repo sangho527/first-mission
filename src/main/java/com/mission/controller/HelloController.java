@@ -14,7 +14,7 @@ HelloController {
     @Bean
     @GetMapping("/hello")
     public String hello(){
-        return "드디어 했다.";
+        return "Kimsangho";
     }
 
 }
