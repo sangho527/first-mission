@@ -1,7 +1,7 @@
 package com.mission.repository;
 
 
-import com.mission.domain.User;
+import com.mission.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

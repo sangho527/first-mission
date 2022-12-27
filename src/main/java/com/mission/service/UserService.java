@@ -1,7 +1,7 @@
 package com.mission.service;
 
 
-import com.mission.domain.User;
+import com.mission.domain.entity.User;
 import com.mission.exception.AppException;
 import com.mission.exception.ErrorCode;
 import com.mission.repository.UserRepository;

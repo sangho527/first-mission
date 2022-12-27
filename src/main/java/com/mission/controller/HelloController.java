@@ -16,5 +16,4 @@ HelloController {
     public String hello(){
         return "Kimsangho";
     }
-
 }
