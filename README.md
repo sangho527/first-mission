@@ -1,5 +1,9 @@
 ### 회원가입, 로그인, 게시물 등록 및 조회 구현 프로젝트 입니다.
 
+#### SwaggerUi 주소
+
+http://ec2-13-209-97-99.ap-northeast-2.compute.amazonaws.com:8080/swagger-ui/
+
 #### 목표
 
 회원가입을 통해 계정, 패스워드를 생성 및 로그인을 했을때 JWT가 생성되어 유저에게 전달 하고
