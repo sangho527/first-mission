@@ -18,3 +18,7 @@ http://ec2-13-209-97-99.ap-northeast-2.compute.amazonaws.com:8080/swagger-ui/
 #### ERD
 
 ![img.png](img.png) 
+
+#### ERD
+
+![image](https://likelion.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe3d2805a-c105-4a7a-ac2b-9751b3544f55%2FUntitled.png?table=block&id=e90b71f4-cbf6-4514-9780-7ef671f8c795&spaceId=c69962b0-3951-485b-b10a-5bb29576bba8&width=1070&userId=&cache=v2)
