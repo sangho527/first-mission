@@ -1,14 +1,15 @@
-package com.mission.domain.dto;
+package com.mission.domain.dto.post;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
-public class PostCreateRequest {
-    private String userName;
+@Builder
+public class PostRequest {
     private String title;
-    private String content;
+    private String body;
 }
