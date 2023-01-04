@@ -1,26 +1,26 @@
 package com.mission.domain.entity;
 
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Builder
-@Getter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Post extends BaseEntity{
+@Getter
+public class Comment extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String body;
+    private String comment;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
-    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }

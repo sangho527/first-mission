@@ -1,6 +1,6 @@
 package com.mission.service;
 
-import com.mission.domain.dto.PostResponse;
+import com.mission.domain.dto.post.PostResponse;
 import com.mission.domain.entity.Post;
 import com.mission.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,17 +25,10 @@ public class PostService {
         // 저장 하기
         Post post = Post.builder()
                 .title(title)
-                .content(content)
+                .body(content)
                 .build();
         postRepository.save(post);
 
         return "SUCCESS";
-    }
-
-    public List<PostResponse> getPost(Pageable pageable){
-        Page<Post> post = postRepository.findAll((org.springframework.data.domain.Pageable) pageable);
-        List<PostResponse> postResponses = post.stream()
-                .map(p -> PostResponse.of(p)).collect(Collectors.toList());
-        return postResponses;
     }
 }

@@ -13,14 +13,11 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
     private String password;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Post> post;
 
 }
