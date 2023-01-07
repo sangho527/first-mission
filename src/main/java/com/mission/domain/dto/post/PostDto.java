@@ -1,12 +1,15 @@
 package com.mission.domain.dto.post;
 
+import com.mission.domain.entity.Post;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
+@NoArgsConstructor
 public class PostDto {
     private Long id;
     private String title;
@@ -23,4 +26,15 @@ public class PostDto {
         this.createdAt = createdAt;
         this.lastModifiedAt = lastModifiedAt;
     }
+
+    public static PostDto toPostDto(Post post) {
+        return PostDto.builder()
+                .id(post.getId())
+                .title(post.getTitle())
+                .body(post.getBody())
+                .userName(post.getUser().getUserName())
+                .createdAt(post.getCreatedAt())
+                .build();
+    }
+
 }
