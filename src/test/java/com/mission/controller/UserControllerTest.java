@@ -43,7 +43,7 @@ class UserControllerTest {
 
         String userName = "Sangho";
         String password = "password";
-        mockMvc.perform(post("/api/v1/users/join")
+        mockMvc.perform(post("/users/join")
                         .with(csrf()) // 포스트 호출할때 이게 들어있는 라이브러리가 spring security test
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new UserJoinRequest(userName,password)))) // userName, password를 전달
@@ -57,7 +57,7 @@ class UserControllerTest {
     @WithMockUser
     void join_fail() throws Exception {
 
-        when(userService.join(any(), any()))
+        when(userService.join(any()/*, any()*/))
                 .thenThrow(new RuntimeException("해당 userId가 중복됩니다."));
 
         String userName = "Sangho";

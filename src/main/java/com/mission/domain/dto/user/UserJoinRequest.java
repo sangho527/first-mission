@@ -2,11 +2,14 @@ package com.mission.domain.dto.user;
 
 
 
+import com.mission.domain.entity.User;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
+@NoArgsConstructor
 public class UserJoinRequest {
     private String userName;
     private String password;
@@ -14,5 +17,12 @@ public class UserJoinRequest {
     public UserJoinRequest(String userName, String password){
         this.userName = userName;
         this.password = password;
+    }
+
+    public User user(String password) {
+        return User.builder()
+                .userName(this.userName)
+                .password(password)
+                .build();
     }
 }

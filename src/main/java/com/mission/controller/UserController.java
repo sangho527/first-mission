@@ -1,9 +1,13 @@
 package com.mission.controller;
 
 
+import com.mission.domain.dto.Response;
 import com.mission.domain.dto.user.UserJoinRequest;
+import com.mission.domain.dto.user.UserJoinResponse;
 import com.mission.domain.dto.user.UserLoginRequest;
+import com.mission.domain.dto.user.UserLoginResponse;
 import com.mission.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,15 +24,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("join") // 회원가입
-    public ResponseEntity<String> join(@RequestBody UserJoinRequest dto) {
-        userService.join(dto.getUserName(), dto.getPassword());
-        return ResponseEntity.ok().body("회원가입에 성공 했습니다.");
+    @PostMapping("/join") // 회원가입
+    public ResponseEntity<Response> join(@RequestBody UserJoinRequest userJoinRequest) {
+        UserJoinResponse userJoinResponse = userService.join(userJoinRequest);
+        return ResponseEntity.ok().body(Response.success(userJoinResponse));
     }
 
-    @PostMapping("login") // 로그인
-    public ResponseEntity<String> login(@RequestBody UserLoginRequest dto) {
-        String token = userService.login(dto.getUserName(), dto.getPassword());
-        return ResponseEntity.ok().body(token);
-    }
+
+
+//    @PostMapping("/login") // 로그인
+//    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest dto) {
+//        String token = userService.login(dto.getUserName(), dto.getPassword());
+//        return ResponseEntity.ok().body(token);
+//    }
 }
