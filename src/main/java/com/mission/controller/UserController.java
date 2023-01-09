@@ -7,7 +7,6 @@ import com.mission.domain.dto.user.UserJoinResponse;
 import com.mission.domain.dto.user.UserLoginRequest;
 import com.mission.domain.dto.user.UserLoginResponse;
 import com.mission.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,17 +24,17 @@ public class UserController {
     }
 
     @PostMapping("/join") // 회원가입
-    public ResponseEntity<Response> join(@RequestBody UserJoinRequest userJoinRequest) {
+    public ResponseEntity<Response<UserJoinResponse>> join(@RequestBody UserJoinRequest userJoinRequest) {
         UserJoinResponse userJoinResponse = userService.join(userJoinRequest);
         return ResponseEntity.ok().body(Response.success(userJoinResponse));
     }
 
 
 
-//    @PostMapping("/login") // 로그인
-//    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest dto) {
-//        String token = userService.login(dto.getUserName(), dto.getPassword());
-//        return ResponseEntity.ok().body(token);
-//    }
+    @PostMapping("/login") // 로그인
+    public ResponseEntity<Response<UserLoginResponse>> login(@RequestBody UserLoginRequest userLoginRequest) {
+        String token = userService.login(userLoginRequest.getUserName(), userLoginRequest.getPassword());
+        return ResponseEntity.ok().body(Response.success(new UserLoginResponse(token)));
+    }
 
 }
