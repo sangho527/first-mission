@@ -1,6 +1,8 @@
 package com.mission.service;
 
 
+import com.mission.domain.dto.user.UserJoinRequest;
+import com.mission.domain.dto.user.UserJoinResponse;
 import com.mission.domain.entity.User;
 import com.mission.exception.AppException;
 import com.mission.exception.ErrorCode;
@@ -23,21 +25,26 @@ public class UserService {
 
     private Long expireTimeMs = 1000 * 60 * 60l; // 1시간 , long이라 l 붙여줌
 
-    public String join(String userName, String password) {
-
+    public UserJoinResponse join(UserJoinRequest userJoinRequest) {
         // userName 중복 체크하기
-        userRepository.findByUserName(userName)
+        userRepository.findByUserName(userJoinRequest.getUserName())
                 .ifPresent(user -> {
-                    throw new AppException(ErrorCode.USERNAME_DUPLICATED, userName + "는 이미 존재합니다.");
+                    throw new AppException(ErrorCode.USERNAME_DUPLICATED, ErrorCode.USERNAME_DUPLICATED.getMessage());
                 });
         // 저장 하기
-        User user = User.builder()
-                .userName(userName)
-                .password(encoder.encode(password)) // password를 인코딩해서 저장
+//        User user = User.builder()
+//                .userName(userName)
+//                .password(encoder.encode(password)) // password를 인코딩해서 저장
+//                .build();
+//        userRepository.save(user);
+//
+//        return "SUCCESS";
+        User savedUser = userRepository.save(userJoinRequest.user(encoder.encode(userJoinRequest.getPassword())));
+        return UserJoinResponse.builder()
+                .userId(savedUser.getId())
+                .userName(savedUser.getUserName())
                 .build();
-        userRepository.save(user);
 
-        return "SUCCESS";
     }
 
     public String login(String userName, String password) {
@@ -54,8 +61,7 @@ public class UserService {
         }
 
         String token = JwtUtil.createToken(selectedUser.getUserName(), secretKey, expireTimeMs);
-
-        return JwtUtil.createToken(userName, secretKey, expireTimeMs);
-//        return token;
+//        return JwtUtil.createToken(userName, secretKey, expireTimeMs);
+        return token;
     }
 }
