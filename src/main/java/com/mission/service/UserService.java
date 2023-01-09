@@ -1,6 +1,7 @@
 package com.mission.service;
 
 
+import com.mission.domain.dto.user.UserDto;
 import com.mission.domain.dto.user.UserJoinRequest;
 import com.mission.domain.dto.user.UserJoinResponse;
 import com.mission.domain.entity.User;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import static com.mission.exception.ErrorCode.USERNAME_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -31,14 +34,7 @@ public class UserService {
                 .ifPresent(user -> {
                     throw new AppException(ErrorCode.USERNAME_DUPLICATED, ErrorCode.USERNAME_DUPLICATED.getMessage());
                 });
-        // 저장 하기
-//        User user = User.builder()
-//                .userName(userName)
-//                .password(encoder.encode(password)) // password를 인코딩해서 저장
-//                .build();
-//        userRepository.save(user);
-//
-//        return "SUCCESS";
+
         User savedUser = userRepository.save(userJoinRequest.user(encoder.encode(userJoinRequest.getPassword())));
         return UserJoinResponse.builder()
                 .userId(savedUser.getId())
@@ -52,7 +48,7 @@ public class UserService {
         // userName 없음
 
         User selectedUser = userRepository.findByUserName(userName) // userRepo에서 유저네임을 찾는다
-                .orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND, userName + "이 없습니다."));
+                .orElseThrow(() -> new AppException(USERNAME_NOT_FOUND, userName + "이 없습니다."));
 
         // password 틀림
 
@@ -61,7 +57,17 @@ public class UserService {
         }
 
         String token = JwtUtil.createToken(selectedUser.getUserName(), secretKey, expireTimeMs);
-//        return JwtUtil.createToken(userName, secretKey, expireTimeMs);
         return token;
     }
+
+    public UserDto getUserName(String userName) {
+        User user = userRepository.findByUserName(userName)
+                .orElseThrow(() -> new AppException(USERNAME_NOT_FOUND, USERNAME_NOT_FOUND.getMessage()));
+        return UserDto.builder()
+                .id(user.getId())
+                .userName(user.getUserName())
+                .password(user.getPassword())
+                .build();
+    }
+
 }

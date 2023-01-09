@@ -7,13 +7,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+
 @Getter
 @NoArgsConstructor
 @Builder
 public class PostRequest {
     private String title;
     private String body;
+
+    public PostRequest(String title, String body){
+        this.title = title;
+        this.body = body;
+    }
 
     public Post toEntity(User user) {
         return Post.builder()

@@ -21,13 +21,12 @@ public class PostService {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
 
-//    public PostDto writePost(PostRequest postRequest, String userName){
-//        User user = userRepository.findByUserName(userName)
-//                .orElseThrow(() -> new AppException(USERNAME_NOT_FOUND, USERNAME_NOT_FOUND.getMessage()));
-//        Post savedPost = postRepository.save(postRequest.toEntity(user));
-//        return PostDto.toPostDto(savedPost);
-//    }
-
+    public PostDto writePost(PostRequest postRequest, String userName){
+        User user = userRepository.findByUserName(userName)
+                .orElseThrow(() -> new AppException(USERNAME_NOT_FOUND, USERNAME_NOT_FOUND.getMessage()));
+        Post savedPost = postRepository.save(postRequest.toEntity(user));
+        return PostDto.toPostDto(savedPost);
+    }
 
     //        postRepository.findByTitle(content)
 //                .ifPresent(post -> {

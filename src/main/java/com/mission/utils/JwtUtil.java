@@ -16,7 +16,17 @@ public class JwtUtil {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + exprieTimeMs)) // 시간 받기
                 .signWith(SignatureAlgorithm.HS256, secretKey)
-                .compact()
-                ;
+                .compact();
     }
+
+    public static String getUserName(String token, String key) {
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token)
+                .getBody().get("userName", String.class);
+    }
+
+//    public static boolean isExpired(String token, String key) {
+//        return Jwts.parser().setSigningKey(key).parseClaimsJws(token)
+//                .getBody().getExpiration().before(new Date());
+//    }
+
 }
