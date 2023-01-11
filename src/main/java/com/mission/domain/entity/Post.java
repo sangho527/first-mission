@@ -29,4 +29,21 @@ public class Post extends BaseEntity{
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Post(Long id, String title, String body, User user, List<Comment> comments) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.user = user;
+        this.comments = comments;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+
 }
