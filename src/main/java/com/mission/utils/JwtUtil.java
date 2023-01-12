@@ -24,6 +24,16 @@ public class JwtUtil {
                 .getBody().get("userName", String.class);
     }
 
+    public static boolean isExpired(String token, String key) {
+        Date expiredDate = extractClaims(token, key).getExpiration(); // expire timestamp를 return
+        return expiredDate.before(new Date()); // 현재보다 전인지 check
+    }
+
+    private static Claims extractClaims(String token, String key) {
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+    }
+
+
 //    public static boolean isExpired(String token, String key) {
 //        return Jwts.parser().setSigningKey(key).parseClaimsJws(token)
 //                .getBody().getExpiration().before(new Date());

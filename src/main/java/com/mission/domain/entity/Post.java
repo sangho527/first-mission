@@ -22,7 +22,7 @@ public class Post extends BaseEntity{
     private String title;
     private String body;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
     @ManyToOne(fetch = FetchType.LAZY)
