@@ -26,8 +26,9 @@ public class PostController {
         return ResponseEntity.ok().body(Response.success(new PostResponse("포스트 등록 완료", postDto.getId())));
     }
 
-//    @GetMapping() // 보여주는 거
-//    public ResponseEntity<List<PostResponse>> getPostList(Pageable pageable){
-//        return ResponseEntity.ok().body(postService.getPost(pageable));
-//    }
+    @GetMapping("/{postId}") // 포스트 상세 조회
+    public ResponseEntity<Response<PostDto>>findById(@PathVariable Long postId) {
+        PostDto postDto = postService.findDetail(postId);
+        return ResponseEntity.ok().body(Response.success(postDto));
+    }
 }

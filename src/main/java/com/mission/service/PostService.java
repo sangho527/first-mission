@@ -11,6 +11,7 @@ import com.mission.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.mission.exception.ErrorCode.POST_NOT_FOUND;
 import static com.mission.exception.ErrorCode.USERNAME_NOT_FOUND;
 
 @Service
@@ -26,6 +27,12 @@ public class PostService {
                 .orElseThrow(() -> new AppException(USERNAME_NOT_FOUND, USERNAME_NOT_FOUND.getMessage()));
         Post savedPost = postRepository.save(postRequest.toEntity(user));
         return PostDto.toPostDto(savedPost);
+    }
+
+    public PostDto findDetail(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new AppException(POST_NOT_FOUND, POST_NOT_FOUND.getMessage()));
+        return PostDto.toPostDto(post);
     }
 
     //        postRepository.findByTitle(content)
