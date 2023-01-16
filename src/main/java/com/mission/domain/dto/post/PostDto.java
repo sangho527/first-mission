@@ -4,6 +4,7 @@ import com.mission.domain.entity.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +36,17 @@ public class PostDto {
                 .userName(post.getUser().getUserName())
                 .createdAt(post.getCreatedAt())
                 .build();
+    }
+
+    public static Page<PostDto> toDtoList(Page<Post> postEntities) {
+        Page<PostDto> postDtoList = postEntities.map(m -> PostDto.builder()
+                .id(m.getId())
+                .title(m.getTitle())
+                .body(m.getBody())
+                .userName(m.getUser().getUserName())
+                .createdAt(m.getRegisteredAt())
+                .build());
+        return postDtoList;
     }
 
 }

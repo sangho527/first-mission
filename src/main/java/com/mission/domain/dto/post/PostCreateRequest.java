@@ -2,7 +2,6 @@ package com.mission.domain.dto.post;
 
 import com.mission.domain.entity.Post;
 import com.mission.domain.entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Builder
-public class PostRequest {
+public class PostCreateRequest {
     private String title;
     private String body;
 
-    public PostRequest(String title, String body){
+    public PostCreateRequest(String title, String body){
         this.title = title;
         this.body = body;
     }

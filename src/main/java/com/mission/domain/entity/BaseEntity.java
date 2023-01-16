@@ -22,4 +22,8 @@ public class BaseEntity {
 
     @LastModifiedDate
     private LocalDateTime lastModifiedAt;
+
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDateTime registeredAt;
 }
