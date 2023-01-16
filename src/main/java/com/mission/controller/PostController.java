@@ -38,7 +38,7 @@ public class PostController {
         return ResponseEntity.ok().body(Response.success(postDto));
     }
 
-    @GetMapping // 포스트 목록 조회
+    @GetMapping // 포스트 목록 조회 수정예정
     public ResponseEntity<Response<Page<PostDto>>> getPostList(@PageableDefault(size = 20) // 20개까지만
                                                                @SortDefault(sort = "registeredAt", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<PostDto> postDtos = postService.getAllItems(pageable);
