@@ -32,7 +32,7 @@ public class UserService {
         // userName 중복 체크하기
         userRepository.findByUserName(userJoinRequest.getUserName())
                 .ifPresent(user -> {
-                    throw new AppException(ErrorCode.USERNAME_DUPLICATED, ErrorCode.USERNAME_DUPLICATED.getMessage());
+                    throw new AppException(ErrorCode.DUPLICATED_USER_NAME, ErrorCode.DUPLICATED_USER_NAME.getMessage());
                 });
 
         User savedUser = userRepository.save(userJoinRequest.user(encoder.encode(userJoinRequest.getPassword())));
